@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginPage from './components/LoginPage';
 import DeliveringPage from './components/DeliveringPage';
+import ScanPage from './components/ScanPage';
+import MoneyPage from './components/MoneyPage';
 
 // const Drawer = createDrawerNavigator();
 // const Tab = createBottomTabNavigator();
@@ -21,6 +23,8 @@ const App = () => {
         >
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="DeliveringPage" component={DeliveringPage} />
+        <Stack.Screen name="ScanPage" component={ScanPage} />
+        <Stack.Screen name="MoneyPage" component={MoneyPage} />
       </Stack.Navigator>
     </NavigationContainer>
 

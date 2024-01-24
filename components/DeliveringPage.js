@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable } from 'react-native';
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
+import ScanPage from './ScanPage';
+import MoneyPage from './MoneyPage';
 
 const DeliveringPage = ({ navigation }) => {
     const navigateToPage = (pageName) => {
@@ -13,6 +15,14 @@ const DeliveringPage = ({ navigation }) => {
         console.log('side panel');
     }
 
+    const navigateScan = () => {
+        navigation.navigate(ScanPage);
+    }
+
+    const navigateMoney = () => {
+        navigation.navigate(MoneyPage)
+    }
+
     const deliveryDataString = `[
         {
           "deliveryNumber": "D12345",
@@ -20,7 +30,7 @@ const DeliveringPage = ({ navigation }) => {
           "address": "123 Main Street Dr STONEY CREEK ON",
           "date": "2024-01-24",
           "distance": "320",
-          "note": "Adress type: HOUSE 0119: hamasduashduahsdasdasdasdadasd"
+          "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
         },
         {
           "deliveryNumber": "D67890",
@@ -28,7 +38,7 @@ const DeliveringPage = ({ navigation }) => {
           "address": "456 Oak Avenue",
           "date": "2024-01-25",
           "distance": ${Math.floor(Math.random() * 10) + 1},
-          "note": "Adress type: HOUSE 0119: hamasduashduahsdasdasdasdadasd"
+          "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
         },
         {
           "deliveryNumber": "D24680",
@@ -144,7 +154,7 @@ const DeliveringPage = ({ navigation }) => {
                         <Text style={{ color: 'lightblue' }}>Delivery</Text>
                     </Pressable>
 
-                    <Pressable style={{ alignItems: 'center' }} onPress={() => navigateToPage('Page2')}>
+                    <Pressable style={{ alignItems: 'center' }} onPress={navigateScan}>
                         {/* Add your icon component or image here */}
                         <AntDesign name="scan1" size={18} color="black" />
                         <Text>Scan</Text>
@@ -156,7 +166,7 @@ const DeliveringPage = ({ navigation }) => {
                         <Text>Message</Text>
                     </Pressable>
 
-                    <Pressable style={{ alignItems: 'center' }} onPress={() => navigateToPage('Page4')}>
+                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMoney}>
                         {/* Add your icon component or image here */}
                         <FontAwesome name="dollar" size={18} color="black" />
                         <Text>Income</Text>
