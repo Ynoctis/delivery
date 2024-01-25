@@ -121,33 +121,6 @@ const MessagePage = ({ navigation }) => {
 
                 </ScrollView>
 
-                {/* Footer */}
-                <View style={styles.footer}>
-                    {/* Footer icons spaced evenly */}
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateRegister}>
-                        {/* Add your icon component or image here */}
-                        <Feather name="box" size={18} color="black" />
-                        <Text>Delivery</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateScan}>
-                        {/* Add your icon component or image here */}
-                        <AntDesign name="scan1" size={18} color="black" />
-                        <Text>Scan</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }}>
-                        {/* Add your icon component or image here */}
-                        <AntDesign name="message1" size={18} color="lightblue" />
-                        <Text style={{ color: 'lightblue' }}>Message</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMoney}>
-                        {/* Add your icon component or image here */}
-                        <FontAwesome name="dollar" size={18} color="black" />
-                        <Text>Income</Text>
-                    </Pressable>
-                </View>
             </View>
         </SafeAreaView>
 

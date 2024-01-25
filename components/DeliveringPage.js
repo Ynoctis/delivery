@@ -4,6 +4,7 @@ import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesom
 import ScanPage from './ScanPage';
 import MoneyPage from './MoneyPage';
 import MessagePage from './MessagePage';
+import MapPage from './MapPage';
 
 const DeliveringPage = ({ navigation }) => {
     const navigateToPage = (pageName) => {
@@ -26,6 +27,10 @@ const DeliveringPage = ({ navigation }) => {
 
     const navigateMessage = () => {
         navigation.navigate(MessagePage)
+    }
+
+    const navigateMap = () => {
+        navigation.navigate(MapPage)
     }
 
     const deliveryDataString = `[
@@ -111,7 +116,10 @@ const DeliveringPage = ({ navigation }) => {
                             <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} />
                         </Pressable>
 
-                        <SimpleLineIcons.Button name="map" size={18} color="black" backgroundColor={"white"} />
+                        <Pressable onPress={navigateMap} style={{paddingRight: 15}}>
+                            <SimpleLineIcons name="map" size={18} color="black" backgroundColor={"white"}/>
+                        </Pressable>
+                        
 
                         <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
 
@@ -151,32 +159,27 @@ const DeliveringPage = ({ navigation }) => {
                 </ScrollView>
 
                 {/* Footer */}
-                <View style={styles.footer}>
-                    {/* Footer icons spaced evenly */}
+                {/* <View style={styles.footer}>
                     <Pressable style={{ alignItems: 'center' }}>
-                        {/* Add your icon component or image here */}
                         <Feather name="box" size={18} color="lightblue" />
                         <Text style={{ color: 'lightblue' }}>Delivery</Text>
                     </Pressable>
 
                     <Pressable style={{ alignItems: 'center' }} onPress={navigateScan}>
-                        {/* Add your icon component or image here */}
                         <AntDesign name="scan1" size={18} color="black" />
                         <Text>Scan</Text>
                     </Pressable>
 
                     <Pressable style={{ alignItems: 'center' }} onPress={navigateMessage}>
-                        {/* Add your icon component or image here */}
                         <AntDesign name="message1" size={18} color="black" />
                         <Text>Message</Text>
                     </Pressable>
 
                     <Pressable style={{ alignItems: 'center' }} onPress={navigateMoney}>
-                        {/* Add your icon component or image here */}
                         <FontAwesome name="dollar" size={18} color="black" />
                         <Text>Income</Text>
                     </Pressable>
-                </View>
+                </View> */}
             </View>
         </SafeAreaView>
 

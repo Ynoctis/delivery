@@ -1,6 +1,7 @@
 // components/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Dimensions, SafeAreaView, Pressable } from 'react-native';
+import DeliveringPage from './DeliveringPage';
 
 
 const LoginPage = ({ navigation }) => {
@@ -11,7 +12,7 @@ const LoginPage = ({ navigation }) => {
     const handleSignIn = () => {
         // Perform authentication logic here
         // For simplicity, let's navigate to the HomeScreen after "signing in"
-        navigation.navigate('DeliveringPage');
+        navigation.navigate('Main');
     };
     
     // logic in the future
