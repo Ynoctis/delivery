@@ -4,9 +4,9 @@ import Modal from 'react-native-modal';
 import { AntDesign, Feather, FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import DeliveringPage from './DeliveringPage';
 import MoneyPage from './MoneyPage';
-import MessagePage from './MessagePage';
+import ScanPage from './ScanPage';
 
-const ScanPage = ({ navigation }) => {
+const MessagePage = ({ navigation }) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -33,9 +33,10 @@ const ScanPage = ({ navigation }) => {
         navigation.navigate(MoneyPage)
     }
 
-    const navigateMessage = () => {
-        navigation.navigate(MessagePage)
+    const navigateScan = () => {
+        navigation.navigate(ScanPage)
     }
+
 
 
     return (
@@ -47,9 +48,10 @@ const ScanPage = ({ navigation }) => {
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
                         <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleModal} />
-                        <Text style={{ alignSelf: 'center', fontSize: 18 }}> Scan </Text>
+                        <Text style={{ alignSelf: 'center', fontSize: 18 }}> Message </Text>
                     </View>
 
+                    {/* Side panel */}
                     <Modal
                         isVisible={isModalVisible}
                         animationIn="slideInLeft"
@@ -109,67 +111,13 @@ const ScanPage = ({ navigation }) => {
                             </View>
                         </View>
                     </Modal>
-
-                    {/* Icons on the right side of the header */}
-                    {/* Right icon 1 */}
-                    {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                        <Pressable style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-                            <Text style={{ marginRight: 5 }}>Route</Text>
-                            <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} />
-                        </Pressable>
-
-                        <SimpleLineIcons.Button name="map" size={18} color="black" backgroundColor={"white"} />
-
-                        <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
-
-                    </View> */}
                 </View>
 
 
                 {/* Body */}
                 <ScrollView style={styles.body}>
-                    {/*Your scrollable content goes here */}
-                    <View style={styles.deliveryContainer}>
-                        <View style={styles.deliveryItem}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                                <Image style={{ width: '25%', aspectRatio: 1, height: undefined, alignSelf: 'center' }} source={require('../images/box.png')} resizeMode="contain" />
-                                <View style={{ alignSelf: 'center' }}>
-                                    <Text style={{ color: 'gray', fontWeight: '500' }}>Orders to pick-up</Text>
-                                    <Text style={{ fontSize: 45, fontWeight: '600' }}>0</Text>
-                                    <Text style={{ width: Dimensions.get('window').width / 3, }}>Unit 420, 420 Wood Bank Rd W, Milton ON, A1B2C3</Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        <View style={styles.deliveryItem}>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                                <View style={{ alignSelf: 'center' }}>
-                                    <Text style={{ color: 'gray', fontWeight: '500' }}>Orders to Drop-off</Text>
-                                    <Text style={{ fontSize: 45, fontWeight: '600' }}>0</Text>
-                                    <Text style={{ width: Dimensions.get('window').width / 3, }}>No service point is currently assigned to you</Text>
-                                </View>
-                                <Image style={{ width: '25%', aspectRatio: 1, height: undefined, alignSelf: 'center' }} source={require('../images/box.png')} resizeMode="contain" />
-                            </View>
-                        </View>
-
-                        <View style={{ backgroundColor: 'white', borderRadius: 10, marginBottom: 20, height: Dimensions.get('window').height / 8, }}>
-                            <View style={{ flex: 1, flexDirection: 'row', }}>
-                                <Image style={{ width: '10%', aspectRatio: 1, height: undefined, alignSelf: 'center', marginHorizontal: Dimensions.get('window').width / 15 }} source={require('../images/box.png')} resizeMode="contain" />
-                                <View style={{}}>
-                                    <View style={{ justifyContent: 'space-between', flex: 1, flexDirection: 'row', width: Dimensions.get('window').width / 1.5, }}>
-                                        <View style={{ alignSelf: 'center' }}>
-                                            <Text style={{ fontWeight: '500', }}>Business Pick-up</Text>
-                                            <Text style={{ width: Dimensions.get('window').width / 3, fontSize: 12, }}>Pick-up parcels from a business partner</Text>
-                                        </View>
-
-                                        <MaterialIcons style={{ alignSelf: 'center' }} name="arrow-forward-ios" size={24} color="black" />
-                                    </View>
-
-                                </View>
-                            </View>
-                        </View>
-                    </View>
+                    {/*scrollable content*/}
+                    
 
                 </ScrollView>
 
@@ -182,16 +130,16 @@ const ScanPage = ({ navigation }) => {
                         <Text>Delivery</Text>
                     </Pressable>
 
-                    <Pressable style={{ alignItems: 'center' }}>
+                    <Pressable style={{ alignItems: 'center' }} onPress={navigateScan}>
                         {/* Add your icon component or image here */}
-                        <AntDesign name="scan1" size={18} color="lightblue" />
-                        <Text style={{ color: 'lightblue' }}>Scan</Text>
+                        <AntDesign name="scan1" size={18} color="black" />
+                        <Text>Scan</Text>
                     </Pressable>
 
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMessage}>
+                    <Pressable style={{ alignItems: 'center' }}>
                         {/* Add your icon component or image here */}
-                        <AntDesign name="message1" size={18} color="black" />
-                        <Text>Message</Text>
+                        <AntDesign name="message1" size={18} color="lightblue" />
+                        <Text style={{ color: 'lightblue' }}>Message</Text>
                     </Pressable>
 
                     <Pressable style={{ alignItems: 'center' }} onPress={navigateMoney}>
@@ -257,4 +205,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ScanPage;
+export default MessagePage;

@@ -3,6 +3,7 @@ import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
 import ScanPage from './ScanPage';
 import MoneyPage from './MoneyPage';
+import MessagePage from './MessagePage';
 
 const DeliveringPage = ({ navigation }) => {
     const navigateToPage = (pageName) => {
@@ -21,6 +22,10 @@ const DeliveringPage = ({ navigation }) => {
 
     const navigateMoney = () => {
         navigation.navigate(MoneyPage)
+    }
+
+    const navigateMessage = () => {
+        navigation.navigate(MessagePage)
     }
 
     const deliveryDataString = `[
@@ -148,7 +153,7 @@ const DeliveringPage = ({ navigation }) => {
                 {/* Footer */}
                 <View style={styles.footer}>
                     {/* Footer icons spaced evenly */}
-                    <Pressable style={{ alignItems: 'center' }} onPress={() => navigateToPage('Page1')}>
+                    <Pressable style={{ alignItems: 'center' }}>
                         {/* Add your icon component or image here */}
                         <Feather name="box" size={18} color="lightblue" />
                         <Text style={{ color: 'lightblue' }}>Delivery</Text>
@@ -160,7 +165,7 @@ const DeliveringPage = ({ navigation }) => {
                         <Text>Scan</Text>
                     </Pressable>
 
-                    <Pressable style={{ alignItems: 'center' }} onPress={() => navigateToPage('Page3')}>
+                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMessage}>
                         {/* Add your icon component or image here */}
                         <AntDesign name="message1" size={18} color="black" />
                         <Text>Message</Text>
