@@ -1,33 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable } from 'react-native';
-import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
-import ScanPage from './ScanPage';
-import MoneyPage from './MoneyPage';
-import MessagePage from './MessagePage';
+import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, } from '@expo/vector-icons';
 import MapPage from './MapPage';
+import SidePanel from './SidePanel';
 
 const DeliveringPage = ({ navigation }) => {
-    const navigateToPage = (pageName) => {
-        // Implement navigation logic based on the selected page
-        // Example: navigation.navigate(pageName);
-        console.log(`Navigating to ${pageName}`);
+
+    const [isSidePanelVisible, setSidePanelVisible] = useState(false);
+
+    const toggleSidePanel = () => {
+        setSidePanelVisible(!isSidePanelVisible);
     };
-
-    const drawerSidePanel = () => {
-        console.log('side panel');
-    }
-
-    const navigateScan = () => {
-        navigation.navigate(ScanPage);
-    }
-
-    const navigateMoney = () => {
-        navigation.navigate(MoneyPage)
-    }
-
-    const navigateMessage = () => {
-        navigation.navigate(MessagePage)
-    }
 
     const navigateMap = () => {
         navigation.navigate(MapPage)
@@ -103,9 +86,12 @@ const DeliveringPage = ({ navigation }) => {
                     {/* Icons on the left side of the header */}
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} />
-
+                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleSidePanel} />
                     </View>
+                    <SidePanel
+                        isVisible={isSidePanelVisible}
+                        onClose={toggleSidePanel}
+                    />
 
                     {/* Icons on the right side of the header */}
                     {/* Right icon 1 */}
@@ -196,7 +182,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: Dimensions.get('window').height / 15,
+        paddingTop: Dimensions.get('window').height / 13.5,
         paddingHorizontal: Dimensions.get('window').width / 40,
         paddingBottom: Dimensions.get('window').height / 50,
     },

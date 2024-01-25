@@ -10,12 +10,6 @@ const MoneyPage = ({ navigation }) => {
     const [mobileNumber, setMobileNumber] = useState('');
     const [sinNum, setSinNum] = useState('');
 
-    const navigateToPage = (pageName) => {
-        // Implement navigation logic based on the selected page
-        // Example: navigation.navigate(pageName);
-        console.log(`Navigating to ${pageName}`);
-    };
-
     const handleSignIn = () => {
         // Perform authentication logic here
         // For simplicity, let's navigate to the HomeScreen after "signing in"
@@ -39,16 +33,6 @@ const MoneyPage = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                {/* Header */}
-                {/* <View style={styles.header}>
-                    Icons on the left side of the header
-                    <View style={styles.headerIcons}>
-                        Left icon 1
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} />
-                        <Text style={{ alignSelf: 'center', fontSize: 18 }}> Income </Text>
-                    </View>
-                </View> */}
-
 
                 {/* Body */}
                 <ScrollView style={styles.body}>

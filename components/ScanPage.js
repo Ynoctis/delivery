@@ -1,41 +1,15 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable, Image } from 'react-native';
-import Modal from 'react-native-modal';
-import { AntDesign, Feather, FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
-import DeliveringPage from './DeliveringPage';
-import MoneyPage from './MoneyPage';
-import MessagePage from './MessagePage';
+import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Image } from 'react-native';
+import { AntDesign, MaterialIcons, } from '@expo/vector-icons';
+import SidePanel from './SidePanel';
 
-const ScanPage = ({ navigation }) => {
+const ScanPage = ({  }) => {
 
-    const [isModalVisible, setModalVisible] = useState(false);
+    const [isSidePanelVisible, setSidePanelVisible] = useState(false);
 
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
+    const toggleSidePanel = () => {
+        setSidePanelVisible(!isSidePanelVisible);
     };
-
-
-    const navigateToPage = (pageName) => {
-        // Implement navigation logic based on the selected page
-        // Example: navigation.navigate(pageName);
-        console.log(`Navigating to ${pageName}`);
-    };
-
-    const drawerSidePanel = () => {
-        console.log('side panel');
-    }
-
-    const navigateRegister = () => {
-        navigation.navigate(DeliveringPage)
-    }
-
-    const navigateMoney = () => {
-        navigation.navigate(MoneyPage)
-    }
-
-    const navigateMessage = () => {
-        navigation.navigate(MessagePage)
-    }
 
 
     return (
@@ -46,84 +20,14 @@ const ScanPage = ({ navigation }) => {
                     {/* Icons on the left side of the header */}
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleModal} />
+                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleSidePanel} />
                         <Text style={{ alignSelf: 'center', fontSize: 18 }}> Scan </Text>
                     </View>
+                    <SidePanel
+                        isVisible={isSidePanelVisible}
+                        onClose={toggleSidePanel}
+                    />
 
-                    <Modal
-                        isVisible={isModalVisible}
-                        animationIn="slideInLeft"
-                        animationOut="slideOutLeft"
-                        backdropOpacity={0.5}
-                        onBackdropPress={toggleModal}
-                        style={styles.modal}
-                    >
-                        {/* Your menu content goes here */}
-                        <View style={styles.menuContent}>
-                            <View style={{ backgroundColor: '#252d52', margin: 0, flex: 1, flexDirection: 'row', alignItems: 'center', }}>
-                                <View style={{ marginVertical: 10, marginHorizontal: 25 }}>
-                                    <Ionicons name="person-circle-outline" size={45} color="white" />
-                                </View>
-                                <View>
-                                    <Text style={{ color: 'white', fontWeight: '500' }}>9011412349</Text>
-                                    <Text style={{ color: 'white', fontSize: 10 }}>Driver ID: 1234</Text>
-                                </View>
-                            </View>
-                            <View style={{ height: Dimensions.get('window').height / 1.1, marginHorizontal: 15, justifyContent: 'space-between' }}>
-                                <View style={{ marginTop: 10 }}>
-                                    <View style={{ flexDirection: 'row', }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Orders preview</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Delivered</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Failed uploads</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Parcel identification</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Notifications</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Tutorial and tips</Text>
-                                    </View>
-                                </View>
-                                <View style={{ marginBottom: 10 }}>
-                                    <View style={{ flexDirection: 'row', }}>
-                                        <Ionicons name="person-circle-outline" size={20} color="white" />
-                                        <Text style={{ color: 'white', alignSelf: 'center', marginLeft: 15, fontWeight: '500' }}>Sign Out</Text>
-                                    </View>
-                                    <View>
-                                    <View style={{ borderBottomColor: 'gray', borderBottomWidth: 0.5, marginVertical: 10 }} />
-                                        <Text style={{color: '#737373', fontSize: 12, marginBottom: 15, textDecorationLine: 'underline', fontWeight: '500'}}>Privacy Policy</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </View>
-                    </Modal>
-
-                    {/* Icons on the right side of the header */}
-                    {/* Right icon 1 */}
-                    {/* <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-
-                        <Pressable style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-                            <Text style={{ marginRight: 5 }}>Route</Text>
-                            <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} />
-                        </Pressable>
-
-                        <SimpleLineIcons.Button name="map" size={18} color="black" backgroundColor={"white"} />
-
-                        <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
-
-                    </View> */}
                 </View>
 
 
@@ -189,7 +93,7 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: Dimensions.get('window').height / 14,
+        paddingTop: Dimensions.get('window').height / 13.5,
         paddingHorizontal: Dimensions.get('window').width / 40,
         paddingBottom: Dimensions.get('window').height / 50,
     },
