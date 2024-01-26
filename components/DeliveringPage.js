@@ -136,29 +136,6 @@ const DeliveringPage = ({ navigation }) => {
                         ))}
                     </View>
                 </ScrollView>
-
-                {/* Footer */}
-                {/* <View style={styles.footer}>
-                    <Pressable style={{ alignItems: 'center' }}>
-                        <Feather name="box" size={18} color="lightblue" />
-                        <Text style={{ color: 'lightblue' }}>Delivery</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateScan}>
-                        <AntDesign name="scan1" size={18} color="black" />
-                        <Text>Scan</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMessage}>
-                        <AntDesign name="message1" size={18} color="black" />
-                        <Text>Message</Text>
-                    </Pressable>
-
-                    <Pressable style={{ alignItems: 'center' }} onPress={navigateMoney}>
-                        <FontAwesome name="dollar" size={18} color="black" />
-                        <Text>Income</Text>
-                    </Pressable>
-                </View> */}
             </View>
         </SafeAreaView>
 

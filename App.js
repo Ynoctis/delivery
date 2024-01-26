@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -12,7 +11,7 @@ import MoneyPage from './components/MoneyPage';
 import MessagePage from './components/MessagePage';
 import MapPage from './components/MapPage';
 
-import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
+import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 import SidePanel from './components/SidePanel';
 
 const Drawer = createDrawerNavigator();
@@ -92,11 +91,6 @@ const DrawerWrapper = () => (
 
 const App = () => {
   return (
-    // <NavigationContainer>
-    //   <Drawer.Navigator initialRouteName="MainStack" drawerContent={(props) => <SidePanel {...props} />}>
-    //     <Drawer.Screen name="MainStack" component={MainStack} />
-    //   </Drawer.Navigator>
-    // </NavigationContainer>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
