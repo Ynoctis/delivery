@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable, TextInput } from 'react-native';
-import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 import DeliveringPage from './DeliveringPage';
 import ScanPage from './ScanPage';
 import MessagePage from './MessagePage';

@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Image } from 'react-native';
 import { AntDesign, MaterialIcons, } from '@expo/vector-icons';
-import SidePanel from './SidePanel';
 
-const ScanPage = ({  }) => {
 
-    const [isSidePanelVisible, setSidePanelVisible] = useState(false);
+const ScanPage = ({ navigation }) => {
 
-    const toggleSidePanel = () => {
-        setSidePanelVisible(!isSidePanelVisible);
-    };
-
+    const openDrawer = () => {
+        navigation.openDrawer();
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -20,13 +17,9 @@ const ScanPage = ({  }) => {
                     {/* Icons on the left side of the header */}
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleSidePanel} />
+                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={openDrawer} />
                         <Text style={{ alignSelf: 'center', fontSize: 18 }}> Scan </Text>
                     </View>
-                    <SidePanel
-                        isVisible={isSidePanelVisible}
-                        onClose={toggleSidePanel}
-                    />
 
                 </View>
 

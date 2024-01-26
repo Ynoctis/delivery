@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import LoginPage from './components/LoginPage';
 import DeliveringPage from './components/DeliveringPage';
@@ -12,19 +13,19 @@ import MessagePage from './components/MessagePage';
 import MapPage from './components/MapPage';
 
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, Feather, FontAwesome } from '@expo/vector-icons';
+import SidePanel from './components/SidePanel';
 
-// const Drawer = createDrawerNavigator();
-// const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const DeliveryStack = () => (
   <Stack.Navigator
-  screenOptions={{
-    headerShown: false
-  }}>
-    <Stack.Screen name="DeliveringPage" component={DeliveringPage}/>
-    <Stack.Screen name="MapPage" component={MapPage}/>
+    screenOptions={{
+      headerShown: false
+    }}>
+    <Stack.Screen name="DeliveringPage" component={DeliveringPage} />
+    <Stack.Screen name="MapPage" component={MapPage} />
   </Stack.Navigator>
 )
 
@@ -75,8 +76,27 @@ const MainTabs = () => (
   </Tab.Navigator>
 )
 
+const DrawerWrapper = () => (
+  <Drawer.Navigator
+    initialRouteName="MainStack"
+    drawerContent={(props) => <SidePanel {...props} />}
+    screenOptions={{
+      drawerStyle: {
+        width: '60%'
+      }
+    }}
+  >
+    <Drawer.Screen name="MainStack" component={MainTabs} options={{ headerShown: false }} />
+  </Drawer.Navigator>
+)
+
 const App = () => {
   return (
+    // <NavigationContainer>
+    //   <Drawer.Navigator initialRouteName="MainStack" drawerContent={(props) => <SidePanel {...props} />}>
+    //     <Drawer.Screen name="MainStack" component={MainStack} />
+    //   </Drawer.Navigator>
+    // </NavigationContainer>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -84,7 +104,7 @@ const App = () => {
         }}
       >
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name="Main" component={MainTabs} />
+        <Stack.Screen name="Main" component={DrawerWrapper} />
       </Stack.Navigator>
     </NavigationContainer>
 

@@ -1,7 +1,6 @@
 // components/LoginScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Dimensions, SafeAreaView, Pressable } from 'react-native';
-import DeliveringPage from './DeliveringPage';
 
 
 const LoginPage = ({ navigation }) => {

@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable } from 'react-native';
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, } from '@expo/vector-icons';
 import MapPage from './MapPage';
-import SidePanel from './SidePanel';
 
 const DeliveringPage = ({ navigation }) => {
 
-    const [isSidePanelVisible, setSidePanelVisible] = useState(false);
-
-    const toggleSidePanel = () => {
-        setSidePanelVisible(!isSidePanelVisible);
-    };
+    const openDrawer = () => {
+        navigation.openDrawer();
+    }
 
     const navigateMap = () => {
         navigation.navigate(MapPage)
@@ -86,12 +83,8 @@ const DeliveringPage = ({ navigation }) => {
                     {/* Icons on the left side of the header */}
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleSidePanel} />
+                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={openDrawer} />
                     </View>
-                    <SidePanel
-                        isVisible={isSidePanelVisible}
-                        onClose={toggleSidePanel}
-                    />
 
                     {/* Icons on the right side of the header */}
                     {/* Right icon 1 */}

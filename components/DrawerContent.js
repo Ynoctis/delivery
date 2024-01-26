@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Pressable } from 'react-native';
+import Modal from 'react-native-modal';
 import { Ionicons } from '@expo/vector-icons';
+import LoginPage from './LoginPage';
 
 
-const SidePanel = ({ navigation }) => {
+const DrawerContent = ({ navigation }) => {
 
     const navigateSignOut = () => {
         navigation.navigate('Login')
@@ -81,4 +83,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default SidePanel;
+export default DrawerContent;

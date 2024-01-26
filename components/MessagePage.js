@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import SidePanel from './SidePanel';
 
-const MessagePage = ({  }) => {
+const MessagePage = ({ navigation }) => {
 
-    const [isSidePanelVisible, setSidePanelVisible] = useState(false);
-
-    const toggleSidePanel = () => {
-        setSidePanelVisible(!isSidePanelVisible);
-    };
+    const openDrawer = () => {
+        navigation.openDrawer();
+    }
 
 
     return (
@@ -20,13 +17,9 @@ const MessagePage = ({  }) => {
                     {/* Icons on the left side of the header */}
                     <View style={styles.headerIcons}>
                         {/* Left icon 1 */}
-                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={toggleSidePanel} />
+                        <AntDesign.Button name="bars" size={20} color="black" backgroundColor={"white"} onPress={openDrawer} />
                         <Text style={{ alignSelf: 'center', fontSize: 18 }}> Message </Text>
                     </View>
-                    <SidePanel
-                        isVisible={isSidePanelVisible}
-                        onClose={toggleSidePanel}
-                    />
                 </View>
 
 
