@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, TextInput } from 'react-native';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
 
 const MessagePage = ({ navigation }) => {
 
@@ -26,7 +26,20 @@ const MessagePage = ({ navigation }) => {
                 {/* Body */}
                 <ScrollView style={styles.body}>
                     {/*scrollable content*/}
+                    <View style={styles.searchContainer}>
+                        <Ionicons
+                            name="search"
+                            size={24}
+                            color="gray"
+                            style={styles.icon}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Route Number/Message"
+                        />
+                    </View>
 
+                    <View style={styles.horizontalLine} />
 
                 </ScrollView>
 
@@ -58,32 +71,19 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#F5F5F5',
     },
-    footer: {
+    searchContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        padding: 10,
-    },
-    deliveryContainer: {
-        backgroundColor: '#F5F5F5',
-        justifyContent: 'center',
-        flex: 1,
-
-    },
-    deliveryItem: {
-        backgroundColor: 'white',
+        alignItems: 'center',
         borderRadius: 10,
-        marginBottom: 20,
-        height: Dimensions.get('window').height / 3.5,
+        marginHorizontal: 10,
+        padding: 5,
+        backgroundColor: 'white'
     },
-    modal: {
-        margin: 0,
-        justifyContent: 'flex-start',
-        width: '60%',
-    },
-    menuContent: {
-        backgroundColor: '#090914',
-        height: '100%',
-        flexDirection: 'column'
+    horizontalLine: {
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+        marginHorizontal: 10,
+        marginVertical: 10,
     },
 });
 
