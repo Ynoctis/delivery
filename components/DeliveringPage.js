@@ -70,10 +70,10 @@ const DeliveringPage = ({ navigation }) => {
         "Undelivered": [
             {
                 "deliveryNumber": "D12345",
-                "name": "John Doe",
+                "name": "Bob Smith",
                 "address": "123 Main Street Dr STONEY CREEK ON",
                 "date": "2024-01-24",
-                "distance": "320",
+                "distance": "99",
                 "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
               },
               {
@@ -91,31 +91,34 @@ const DeliveringPage = ({ navigation }) => {
 
     const fetchApiData = (button) => {
         setData(apiData[button]);
-        console.log(button);
+        // console.log(button);
     };
 
     const renderView = () => {
         return (
             <View>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 5, backgroundColor: 'lightgray', borderRadius: 10, borderWidth: 1, borderColor: 'lightgray', marginTop: 5}}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 5, backgroundColor: 'lightgray', borderRadius: 10, borderWidth: 1, borderColor: 'lightgray', marginTop: 5 }}>
                     {Object.keys(apiData).map((button) => (
-                        <Pressable key={button} 
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            paddingVertical: 5,
-                            // borderBottomWidth: selectedButton === button ? 2 : 0, // Highlight the selected button
-                            // borderBottomColor: selectedButton === button ? 'blue' : 'transparent',
-                            // borderColor: 'red',
-                            // borderWidth: 2,
-                            borderRadius: 10,
-                            backgroundColor: selectedButton === button ? 'white' : 'lightgray',
-                        }}
-                        onPress={() => {
-                            fetchApiData(button);
-                            setSelectedButton(button);
-                        }}>
-                            <Text style={{ color: selectedButton === button ? '#3a9fbf' : 'black', textTransform: 'uppercase', fontWeight: selectedButton === button ? '600' : '400' }}>{button}</Text>
+                        <Pressable key={button}
+                            style={{
+                                flex: 1,
+                                alignItems: 'center',
+                                paddingVertical: 5,
+                                borderRadius: 10,
+                                backgroundColor: selectedButton === button ? 'white' : 'lightgray',
+                            }}
+                            onPress={() => {
+                                fetchApiData(button);
+                                setSelectedButton(button);
+                            }}>
+                            <Text
+                                style={{
+                                    color: selectedButton === button ? '#3a9fbf' : 'black',
+                                    textTransform: 'uppercase',
+                                    fontWeight: selectedButton === button ? '600' : '400',
+                                }}>
+                                {button}
+                            </Text>
                         </Pressable>
                     ))}
                 </View>
