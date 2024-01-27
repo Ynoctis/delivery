@@ -1,9 +1,150 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable } from 'react-native';
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, } from '@expo/vector-icons';
 import MapPage from './MapPage';
 
 const DeliveringPage = ({ navigation }) => {
+
+    const [selectedButton, setSelectedButton] = useState('Delivering');
+    const [data, setData] = useState([]);
+
+    const apiDataString = `{
+        "Delivering": [
+            {
+                "deliveryNumber": "D12345",
+                "name": "John Doe",
+                "address": "123 Main Street Dr STONEY CREEK ON",
+                "date": "2024-01-24",
+                "distance": "320",
+                "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
+              },
+              {
+                "deliveryNumber": "D67890",
+                "name": "Jane Smith",
+                "address": "456 Oak Avenue",
+                "date": "2024-01-25",
+                "distance": ${Math.floor(Math.random() * 10) + 1},
+                "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
+              },
+              {
+                "deliveryNumber": "D24680",
+                "name": "Bob Johnson",
+                "address": "789 Pine Road",
+                "date": "2024-01-26",
+                "distance": ${Math.floor(Math.random() * 10) + 1},
+                "note": "Handle with care."
+              },
+              {
+                  "deliveryNumber": "D24680",
+                  "name": "Bob Johnson",
+                  "address": "789 Pine Road",
+                  "date": "2024-01-26",
+                  "distance": ${Math.floor(Math.random() * 10) + 1},
+                  "note": "Handle with care."
+                },
+                {
+                  "deliveryNumber": "D24680",
+                  "name": "Bob Johnson",
+                  "address": "789 Pine Road",
+                  "date": "2024-01-26",
+                  "distance": ${Math.floor(Math.random() * 10) + 1},
+                  "note": "Handle with care."
+                },
+                {
+                  "deliveryNumber": "D24680",
+                  "name": "Bob Johnson",
+                  "address": "789 Pine Road",
+                  "date": "2024-01-26",
+                  "distance": ${Math.floor(Math.random() * 10) + 1},
+                  "note": "Handle with care."
+                },
+                {
+                  "deliveryNumber": "D24680",
+                  "name": "Bob Johnson",
+                  "address": "789 Pine Road",
+                  "date": "2024-01-26",
+                  "distance": ${Math.floor(Math.random() * 10) + 1},
+                  "note": "Handle with care."
+                }
+        ],
+        "Undelivered": [
+            {
+                "deliveryNumber": "D12345",
+                "name": "John Doe",
+                "address": "123 Main Street Dr STONEY CREEK ON",
+                "date": "2024-01-24",
+                "distance": "320",
+                "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
+              },
+              {
+                "deliveryNumber": "D67890",
+                "name": "Jane Smith",
+                "address": "456 Oak Avenue",
+                "date": "2024-01-25",
+                "distance": ${Math.floor(Math.random() * 10) + 1},
+                "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
+              }
+        ]
+    }`;
+
+    const apiData = JSON.parse(apiDataString);
+
+    const fetchApiData = (button) => {
+        setData(apiData[button]);
+        console.log(button);
+    };
+
+    const renderView = () => {
+        return (
+            <View>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 5, backgroundColor: 'lightgray', borderRadius: 10, borderWidth: 1, borderColor: 'lightgray', marginTop: 5}}>
+                    {Object.keys(apiData).map((button) => (
+                        <Pressable key={button} 
+                        style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            paddingVertical: 5,
+                            // borderBottomWidth: selectedButton === button ? 2 : 0, // Highlight the selected button
+                            // borderBottomColor: selectedButton === button ? 'blue' : 'transparent',
+                            // borderColor: 'red',
+                            // borderWidth: 2,
+                            borderRadius: 10,
+                            backgroundColor: selectedButton === button ? 'white' : 'lightgray',
+                        }}
+                        onPress={() => {
+                            fetchApiData(button);
+                            setSelectedButton(button);
+                        }}>
+                            <Text style={{ color: selectedButton === button ? '#3a9fbf' : 'black', textTransform: 'uppercase', fontWeight: selectedButton === button ? '600' : '400' }}>{button}</Text>
+                        </Pressable>
+                    ))}
+                </View>
+                <View style={styles.container}>
+                    {data.map((delivery, index) => (
+                        <View key={index} style={styles.deliveryContainer}>
+                            <View style={styles.deliveryItem}>
+                                <View style={{ marginBottom: 15 }}>
+                                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginLeft: 15, marginTop: 10 }}>{delivery.deliveryNumber}</Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ marginHorizontal: 20, width: Dimensions.get('window').width / 4.5, marginBottom: 0 }}>
+                                        <Text style={{ fontSize: 50, alignSelf: 'center' }}>{delivery.distance}</Text>
+                                        <Text style={{ alignSelf: 'center', fontSize: 14, color: 'gray' }}>Route</Text>
+                                    </View>
+                                    <View style={{ alignSelf: 'center', marginBottom: 20, width: Dimensions.get('window').width / 1.75 }}>
+                                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>{delivery.name}</Text>
+                                        <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.address}</Text>
+                                        <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.date}      {delivery.distance}KM Away</Text>
+                                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: '#01B6FF', fontSize: 12, marginBottom: 2 }}>Note: {delivery.note} </Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    ))}
+                </View>
+            </View>
+        );
+    };
 
     const openDrawer = () => {
         navigation.openDrawer();
@@ -13,67 +154,9 @@ const DeliveringPage = ({ navigation }) => {
         navigation.navigate(MapPage)
     }
 
-    const deliveryDataString = `[
-        {
-          "deliveryNumber": "D12345",
-          "name": "John Doe",
-          "address": "123 Main Street Dr STONEY CREEK ON",
-          "date": "2024-01-24",
-          "distance": "320",
-          "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
-        },
-        {
-          "deliveryNumber": "D67890",
-          "name": "Jane Smith",
-          "address": "456 Oak Avenue",
-          "date": "2024-01-25",
-          "distance": ${Math.floor(Math.random() * 10) + 1},
-          "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
-        },
-        {
-          "deliveryNumber": "D24680",
-          "name": "Bob Johnson",
-          "address": "789 Pine Road",
-          "date": "2024-01-26",
-          "distance": ${Math.floor(Math.random() * 10) + 1},
-          "note": "Handle with care."
-        },
-        {
-            "deliveryNumber": "D24680",
-            "name": "Bob Johnson",
-            "address": "789 Pine Road",
-            "date": "2024-01-26",
-            "distance": ${Math.floor(Math.random() * 10) + 1},
-            "note": "Handle with care."
-          },
-          {
-            "deliveryNumber": "D24680",
-            "name": "Bob Johnson",
-            "address": "789 Pine Road",
-            "date": "2024-01-26",
-            "distance": ${Math.floor(Math.random() * 10) + 1},
-            "note": "Handle with care."
-          },
-          {
-            "deliveryNumber": "D24680",
-            "name": "Bob Johnson",
-            "address": "789 Pine Road",
-            "date": "2024-01-26",
-            "distance": ${Math.floor(Math.random() * 10) + 1},
-            "note": "Handle with care."
-          },
-          {
-            "deliveryNumber": "D24680",
-            "name": "Bob Johnson",
-            "address": "789 Pine Road",
-            "date": "2024-01-26",
-            "distance": ${Math.floor(Math.random() * 10) + 1},
-            "note": "Handle with care."
-          }
-      ]`;
-
-    const deliveryData = JSON.parse(deliveryDataString);
-
+    useEffect(() => {
+        fetchApiData('Delivering');
+    }, []);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -95,46 +178,19 @@ const DeliveringPage = ({ navigation }) => {
                             <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} />
                         </Pressable>
 
-                        <Pressable onPress={navigateMap} style={{paddingRight: 15}}>
-                            <SimpleLineIcons name="map" size={18} color="black" backgroundColor={"white"}/>
+                        <Pressable onPress={navigateMap} style={{ paddingRight: 15 }}>
+                            <SimpleLineIcons name="map" size={18} color="black" backgroundColor={"white"} />
                         </Pressable>
-                        
+
 
                         <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
 
                     </View>
                 </View>
-                <View>
-
-                </View>
 
                 {/* Body */}
                 <ScrollView style={styles.body}>
-                    {/*Your scrollable content goes here */}
-                    <View style={styles.container}>
-                        {deliveryData.map((delivery, index) => (
-                            <View key={index} style={styles.deliveryContainer}>
-                                <View style={styles.deliveryItem}>
-                                    <View style={{ marginBottom: 15 }}>
-                                        <Text style={{ fontWeight: 'bold', fontSize: 16, marginLeft: 15, marginTop: 10 }}>{delivery.deliveryNumber}</Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', }}>
-                                        <View style={{ marginHorizontal: 20, width: Dimensions.get('window').width / 4.5, marginBottom: 0}}>
-                                            <Text style={{ fontSize: 50, alignSelf: 'center', }}>{delivery.distance}</Text>
-                                            <Text style={{ alignSelf: 'center', fontSize: 14, color: 'gray' }}>Route</Text>
-                                        </View>
-                                        <View style={{ alignSelf: 'center', marginBottom: 20, width: Dimensions.get('window').width / 1.75, }}>
-                                            <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>{delivery.name}</Text>
-                                            <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.address}</Text>
-                                            <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.date}      {delivery.distance}KM Away</Text>
-                                            <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: '#01B6FF', fontSize: 12, marginBottom: 2, }}>Note: {delivery.note} </Text>
-                                        </View>
-                                    </View>
-                                </View>
-
-                            </View>
-                        ))}
-                    </View>
+                    {renderView()}
                 </ScrollView>
             </View>
         </SafeAreaView>
@@ -161,7 +217,7 @@ const styles = StyleSheet.create({
     },
     body: {
         flex: 1,
-        padding: 10,
+        paddingHorizontal: 10,
         backgroundColor: '#F5F5F5',
     },
     footer: {
