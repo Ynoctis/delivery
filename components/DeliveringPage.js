@@ -94,6 +94,18 @@ const DeliveringPage = ({ navigation }) => {
         // console.log(button);
     };
 
+    const navigateToDetail = (index) => {
+        const selectedDelivery = data[index];
+        navigation.navigate('DetailPage', {
+            deliveryNumber: selectedDelivery.deliveryNumber,
+            name: selectedDelivery.name,
+            address: selectedDelivery.address,
+            date: selectedDelivery.date,
+            distance: selectedDelivery.distance,
+            note: selectedDelivery.note,
+        })
+    }
+
     const renderView = () => {
         return (
             <View>
@@ -124,25 +136,27 @@ const DeliveringPage = ({ navigation }) => {
                 </View>
                 <View style={styles.container}>
                     {data.map((delivery, index) => (
-                        <View key={index} style={styles.deliveryContainer}>
-                            <View style={styles.deliveryItem}>
-                                <View style={{ marginBottom: 15 }}>
-                                    <Text style={{ fontWeight: 'bold', fontSize: 16, marginLeft: 15, marginTop: 10 }}>{delivery.deliveryNumber}</Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ marginHorizontal: 20, width: Dimensions.get('window').width / 4.5, marginBottom: 0 }}>
-                                        <Text style={{ fontSize: 50, alignSelf: 'center' }}>{delivery.distance}</Text>
-                                        <Text style={{ alignSelf: 'center', fontSize: 14, color: 'gray' }}>Route</Text>
+                        <Pressable key={index} onPress={() => navigateToDetail(index)}>
+                            <View key={index} style={styles.deliveryContainer}>
+                                <View style={styles.deliveryItem}>
+                                    <View style={{ marginBottom: 15 }}>
+                                        <Text style={{ fontWeight: 'bold', fontSize: 16, marginLeft: 15, marginTop: 10 }}>{delivery.deliveryNumber}</Text>
                                     </View>
-                                    <View style={{ alignSelf: 'center', marginBottom: 20, width: Dimensions.get('window').width / 1.75 }}>
-                                        <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>{delivery.name}</Text>
-                                        <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.address}</Text>
-                                        <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.date}      {delivery.distance}KM Away</Text>
-                                        <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: '#01B6FF', fontSize: 12, marginBottom: 2 }}>Note: {delivery.note} </Text>
+                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                        <View style={{ marginHorizontal: 20, width: Dimensions.get('window').width / 4.5, marginBottom: 0 }}>
+                                            <Text style={{ fontSize: 50, alignSelf: 'center' }}>{delivery.distance}</Text>
+                                            <Text style={{ alignSelf: 'center', fontSize: 14, color: 'gray' }}>Route</Text>
+                                        </View>
+                                        <View style={{ alignSelf: 'center', marginBottom: 20, width: Dimensions.get('window').width / 1.75 }}>
+                                            <Text style={{ fontWeight: 'bold', marginBottom: 2 }}>{delivery.name}</Text>
+                                            <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.address}</Text>
+                                            <Text style={{ color: 'gray', fontSize: 12, marginBottom: 2 }}>{delivery.date}      {delivery.distance}KM Away</Text>
+                                            <Text numberOfLines={1} ellipsizeMode='tail' style={{ color: '#01B6FF', fontSize: 12, marginBottom: 2 }}>Note: {delivery.note} </Text>
+                                        </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
+                        </Pressable>
                     ))}
                 </View>
             </View>

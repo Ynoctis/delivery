@@ -13,17 +13,29 @@ import MapPage from './components/MapPage';
 
 import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 import SidePanel from './components/SidePanel';
+import RouteDetail from './components/RouteDetail';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const DeliveryDetailStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false
+    }}>
+    <Stack.Screen name="Delivery" component={DeliveringPage} />
+    <Stack.Screen name="DetailPage" component={RouteDetail} />
+
+  </Stack.Navigator>
+)
 
 const DeliveryStack = () => (
   <Stack.Navigator
     screenOptions={{
       headerShown: false
     }}>
-    <Stack.Screen name="DeliveringPage" component={DeliveringPage} />
+    <Stack.Screen name="DeliveringPage" component={DeliveryDetailStack} />
     <Stack.Screen name="MapPage" component={MapPage} />
   </Stack.Navigator>
 )
