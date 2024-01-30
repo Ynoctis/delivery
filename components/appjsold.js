@@ -24,7 +24,7 @@ const DeliveryDetailStack = () => (
     screenOptions={{
       headerShown: false
     }}>
-    <Stack.Screen name="Delivery" component={DeliveryStack} />
+    <Stack.Screen name="Delivery" component={DeliveringPage} />
     <Stack.Screen
       name="DetailPage"
       component={RouteDetail}
@@ -38,7 +38,7 @@ const DeliveryStack = () => (
     screenOptions={{
       headerShown: false
     }}>
-    <Stack.Screen name="DeliveringTabs" component={MainTabs} />
+    <Stack.Screen name="DeliveringPage" component={DeliveryDetailStack} />
     <Stack.Screen name="MapPage" component={MapPage} />
   </Stack.Navigator>
 )
@@ -50,8 +50,8 @@ const MainTabs = () => (
     }}
   >
     <Tab.Screen
-      name="DeliveringPage"
-      component={DeliveringPage}
+      name="DeliveringStack"
+      component={DeliveryStack}
       options={{
         tabBarLabel: 'Delivery',
         tabBarIcon: ({ color, size }) => (
@@ -100,7 +100,7 @@ const DrawerWrapper = () => (
       }
     }}
   >
-    <Drawer.Screen name="MainStack" component={DeliveryDetailStack} options={{ headerShown: false }} />
+    <Drawer.Screen name="MainStack" component={MainTabs} options={{ headerShown: false }} />
   </Drawer.Navigator>
 )
 

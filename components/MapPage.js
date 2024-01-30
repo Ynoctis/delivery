@@ -16,7 +16,7 @@ const MapPage = ( { navigation } ) => {
   const [locationPermissionDenied, setLocationPermissionDenied] = useState(false);
 
   const navigateDelivery = () => {
-    navigation.navigate('DeliveringPage')
+    navigation.navigate('DeliveringTabs')
 }
 
   // Tested it on my own mobile device, confirmed that it works
