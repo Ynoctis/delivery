@@ -37,7 +37,7 @@ const DeliveringPage = ({ navigation }) => {
                 "note": "Handle with care."
               },
               {
-                  "deliveryNumber": "D24680",
+                  "deliveryNumber": "A12345",
                   "name": "Bob Johnson",
                   "address": "789 Pine Road",
                   "date": "2024-01-26",
@@ -45,7 +45,7 @@ const DeliveringPage = ({ navigation }) => {
                   "note": "Handle with care."
                 },
                 {
-                  "deliveryNumber": "D24680",
+                  "deliveryNumber": "A23456",
                   "name": "Bob Johnson",
                   "address": "789 Pine Road",
                   "date": "2024-01-26",
@@ -53,7 +53,7 @@ const DeliveringPage = ({ navigation }) => {
                   "note": "Handle with care."
                 },
                 {
-                  "deliveryNumber": "D24680",
+                  "deliveryNumber": "S12345",
                   "name": "Bob Johnson",
                   "address": "789 Pine Road",
                   "date": "2024-01-26",
@@ -61,7 +61,7 @@ const DeliveringPage = ({ navigation }) => {
                   "note": "Handle with care."
                 },
                 {
-                  "deliveryNumber": "D24680",
+                  "deliveryNumber": "C12345",
                   "name": "Bob Johnson",
                   "address": "789 Pine Road",
                   "date": "2024-01-26",
@@ -71,7 +71,7 @@ const DeliveringPage = ({ navigation }) => {
         ],
         "Undelivered": [
             {
-                "deliveryNumber": "D12345",
+                "deliveryNumber": "D09871",
                 "name": "Bob Smith",
                 "address": "123 Main Street Dr STONEY CREEK ON",
                 "date": "2024-01-24",
@@ -79,7 +79,7 @@ const DeliveringPage = ({ navigation }) => {
                 "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
               },
               {
-                "deliveryNumber": "D67890",
+                "deliveryNumber": "H71627",
                 "name": "Jane Smith",
                 "address": "456 Oak Avenue",
                 "date": "2024-01-25",
