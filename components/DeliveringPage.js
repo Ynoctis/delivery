@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable, Modal } from 'react-native';
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, } from '@expo/vector-icons';
 import MapPage from './MapPage';
 
@@ -8,13 +8,15 @@ const DeliveringPage = ({ navigation }) => {
     const [selectedButton, setSelectedButton] = useState('Delivering');
     const [data, setData] = useState([]);
 
+    const [selectedSortOption, setSelectedSortOption] = useState('default');
+
     const apiDataString = `{
         "Delivering": [
             {
                 "deliveryNumber": "D12345",
                 "name": "John Doe",
                 "address": "123 Main Street Dr STONEY CREEK ON",
-                "date": "2024-01-24",
+                "date": "2024-01-27",
                 "distance": "320",
                 "note": "Address type: HOUSE 0119: duashduahsdasdasdasdadasd"
               },
@@ -90,8 +92,20 @@ const DeliveringPage = ({ navigation }) => {
     const apiData = JSON.parse(apiDataString);
 
     const fetchApiData = (button) => {
-        setData(apiData[button]);
-        // console.log(button);
+        let categoryData = apiData[button];
+
+        switch (selectedSortOption) {
+            case 'date':
+                categoryData = categoryData.sort((a, b) => new Date(a.date) - new Date(b.date));
+                break;
+            case 'distance':
+                categoryData = categoryData.sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance));
+                break;
+            default:
+                break;
+        }
+
+        setData(categoryData);
     };
 
     const navigateToDetail = (index) => {
@@ -172,8 +186,22 @@ const DeliveringPage = ({ navigation }) => {
     }
 
     useEffect(() => {
-        fetchApiData('Delivering');
-    }, []);
+        fetchApiData(selectedButton);
+    }, [selectedSortOption, selectedButton]);
+
+
+    // sort menu modal
+    const [isModalVisible, setModalVisible] = useState(false);
+    const toggleSortMenu = () => {
+        setModalVisible(!isModalVisible);
+    };
+    const handleSortOptionSelect = (option) => {
+        setSelectedSortOption(option);
+
+        fetchApiData(selectedButton);
+
+        toggleSortMenu();
+    };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -190,9 +218,10 @@ const DeliveringPage = ({ navigation }) => {
                     {/* Right icon 1 */}
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                        <Pressable style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }}>
-                            <Text style={{ marginRight: 5 }}>Route</Text>
-                            <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} />
+                        <Pressable style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 15 }} onPress={toggleSortMenu}>
+                            {/* <Text style={{ marginRight: 5 }}>Route</Text> */}
+                            {/* <FontAwesome6 name="arrow-right-arrow-left" size={18} color="black" backgroundColor={"white"} /> */}
+                            <FontAwesome6 name="sort" size={18} color="black" backgroundColor={"white"} />
                         </Pressable>
 
                         <Pressable onPress={navigateMap} style={{ paddingRight: 15 }}>
@@ -203,6 +232,50 @@ const DeliveringPage = ({ navigation }) => {
                         <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
 
                     </View>
+                    <Modal
+                        animationType="none"
+                        transparent={true}
+                        visible={isModalVisible}
+                        onRequestClose={toggleSortMenu}
+                        onPress={toggleSortMenu}
+                    >
+                        <Pressable
+                            onPress={() => setModalVisible(false)}
+                            style={{height: '100%'}}>
+                            <View style={{ marginTop: Dimensions.get('window').height / 13.5, backgroundColor: 'black'}}>
+
+                                <Text style={{ color: 'white', margin: 5, }}>Sort this list by:</Text>
+
+                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+
+                                {/* Sorting options */}
+                                <Pressable onPress={() => handleSortOptionSelect('default')} style={{ margin: 10, }}>
+                                    <Text style={selectedSortOption === 'default' ? styles.selectedOption : styles.option}>
+                                        Default
+                                    </Text>
+                                </Pressable>
+
+                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+
+                                <Pressable onPress={() => handleSortOptionSelect('date')} style={{ margin: 10, }}>
+                                    <Text style={selectedSortOption === 'date' ? styles.selectedOption : styles.option}>
+                                        Date
+                                    </Text>
+                                </Pressable>
+
+                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+
+                                <Pressable onPress={() => handleSortOptionSelect('distance')} style={{ margin: 10, }}>
+                                    <Text style={selectedSortOption === 'distance' ? styles.selectedOption : styles.option}>
+                                        Distance
+                                    </Text>
+                                </Pressable>
+
+                                <View style={{margin: 5}}></View>
+                            </View>
+                        </Pressable>
+
+                    </Modal>
                 </View>
 
                 {/* Body */}
@@ -249,7 +322,15 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAE5DE',
         borderRadius: 10,
         marginBottom: 20,
-    }
+    },
+    selectedOption: {
+        color: 'lightblue',
+        fontSize: 16,
+    },
+    option: {
+        color: 'white',
+        fontSize: 16,
+    },
 });
 
 export default DeliveringPage;

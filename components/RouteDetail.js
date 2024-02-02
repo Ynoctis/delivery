@@ -64,7 +64,7 @@ const RouteDetail = ({ route, navigation }) => {
             </MapView>
 
             <View style={styles.footer}>
-                <View>
+                <View style={{ borderColor: 'red', borderWidth: 2}}>
                     <View style={{ marginBottom: 15, flexDirection: 'row', }}>
                         <View style={{ flex: 4, alignItems: 'center', }}>
                             <Text style={{ fontWeight: 'bold', fontSize: 40, marginTop: 15, }}>{distance}</Text>
@@ -99,16 +99,16 @@ const RouteDetail = ({ route, navigation }) => {
                         <Text>Delivery by: 2023-12-18 21:47:28</Text>
                         <Text>Package on hold over 1000 hours</Text>
                     </View>
-                    <View style={{marginVertical: 10, marginHorizontal: 20}}>
+                    <View style={{marginVertical: 5, marginHorizontal: 20}}>
                         <Text>Buzz: N/A</Text>
                     </View>
-                    <View style={{marginVertical: 10, marginHorizontal: 20}}>
+                    <View style={{marginVertical: 5, marginHorizontal: 20}}>
                         <Text>Gated Community Code: 001</Text>
                     </View>
-                    <View style={{marginVertical: 10, marginHorizontal: 20}}>
+                    <View style={{marginVertical: 5, marginHorizontal: 20}}>
                         <Text>{note}</Text>
                     </View>
-                    <View style={{ flexDirection: 'row', marginTop: 30}}>
+                    <View style={{ flexDirection: 'row', marginTop: 20}}>
                         <Pressable style={{ flex: 3, backgroundColor: 'lightgray', paddingHorizontal: 30, borderRadius: 15, paddingVertical: 10, justifyContent: 'center', alignItems: 'center', marginHorizontal: 20 }}>
                             <Text>Failed</Text>
                         </Pressable>
@@ -119,14 +119,6 @@ const RouteDetail = ({ route, navigation }) => {
 
                 </View>
             </View>
-
-            {/* <Text>{deliveryNumber}</Text>
-            <Text>{name}</Text>
-            <Text>{address}</Text>
-            <Text>{date}</Text>
-            <Text>{distance}</Text>
-            <Text>{note}</Text> */}
-            {/* Render other details using the passed properties */}
         </View>
     );
 };
