@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable, Modal } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, SafeAreaView, Dimensions, Pressable, Modal, } from 'react-native';
 import { AntDesign, FontAwesome6, SimpleLineIcons, Ionicons, } from '@expo/vector-icons';
 import MapPage from './MapPage';
 
@@ -185,6 +185,11 @@ const DeliveringPage = ({ navigation }) => {
         navigation.navigate(MapPage)
     }
 
+    const navigateSearch = () => {
+        navigation.navigate('SearchPage')
+    }
+
+
     useEffect(() => {
         fetchApiData(selectedButton);
     }, [selectedSortOption, selectedButton]);
@@ -228,8 +233,10 @@ const DeliveringPage = ({ navigation }) => {
                             <SimpleLineIcons name="map" size={18} color="black" backgroundColor={"white"} />
                         </Pressable>
 
+                        <Pressable onPress={navigateSearch} style={{ paddingRight: 15 }}>
+                            <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
+                        </Pressable>
 
-                        <Ionicons name="search-sharp" size={18} color="black" backgroundColor={"white"} />
 
                     </View>
                     <Modal
@@ -238,15 +245,15 @@ const DeliveringPage = ({ navigation }) => {
                         visible={isModalVisible}
                         onRequestClose={toggleSortMenu}
                         onPress={toggleSortMenu}
+                        statusBarTranslucent
                     >
                         <Pressable
                             onPress={() => setModalVisible(false)}
-                            style={{height: '100%'}}>
-                            <View style={{ marginTop: Dimensions.get('window').height / 13.5, backgroundColor: 'black'}}>
-
+                            style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', marginTop: Dimensions.get('window').height / 7, height: '100%' }}>
+                            <View style={{ backgroundColor: 'black', }}>
                                 <Text style={{ color: 'white', margin: 5, }}>Sort this list by:</Text>
 
-                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+                                <View style={{ borderBottomWidth: 1, borderBottomColor: 'white', margin: 5 }}></View>
 
                                 {/* Sorting options */}
                                 <Pressable onPress={() => handleSortOptionSelect('default')} style={{ margin: 10, }}>
@@ -255,7 +262,7 @@ const DeliveringPage = ({ navigation }) => {
                                     </Text>
                                 </Pressable>
 
-                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+                                <View style={{ borderBottomWidth: 1, borderBottomColor: 'white', margin: 5 }}></View>
 
                                 <Pressable onPress={() => handleSortOptionSelect('date')} style={{ margin: 10, }}>
                                     <Text style={selectedSortOption === 'date' ? styles.selectedOption : styles.option}>
@@ -263,7 +270,7 @@ const DeliveringPage = ({ navigation }) => {
                                     </Text>
                                 </Pressable>
 
-                                <View style={{borderBottomWidth: 1, borderBottomColor: 'white', margin: 5}}></View>
+                                <View style={{ borderBottomWidth: 1, borderBottomColor: 'white', margin: 5 }}></View>
 
                                 <Pressable onPress={() => handleSortOptionSelect('distance')} style={{ margin: 10, }}>
                                     <Text style={selectedSortOption === 'distance' ? styles.selectedOption : styles.option}>
@@ -271,7 +278,7 @@ const DeliveringPage = ({ navigation }) => {
                                     </Text>
                                 </Pressable>
 
-                                <View style={{margin: 5}}></View>
+                                <View style={{ margin: 5 }}></View>
                             </View>
                         </Pressable>
 

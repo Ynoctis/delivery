@@ -14,6 +14,7 @@ import MapPage from './components/MapPage';
 import { AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 import SidePanel from './components/SidePanel';
 import RouteDetail from './components/RouteDetail';
+import SearchPage from './components/SearchPage';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -29,7 +30,7 @@ const DeliveryDetailStack = () => (
       name="DetailPage"
       component={RouteDetail}
     />
-
+    <Stack.Screen name="SearchPage" component={SearchPage} />
   </Stack.Navigator>
 )
 
