@@ -22,6 +22,7 @@ const MapPage = ({ navigation }) => {
   const [locationPermissionDenied, setLocationPermissionDenied] = useState(false);
   const [optimizedRouteData, setOptimizedRouteData] = useState([]);
   const [rawRouteData, setRawRouteData] = useState([]);
+  const [distanceMatrixOptimized, setDistanceMatrixOptimized] = useState([]);
 
   const navigateDelivery = () => {
     navigation.navigate('DeliveringTabs')
@@ -247,10 +248,18 @@ const MapPage = ({ navigation }) => {
 
   useEffect(() => {
     const fetchOptimizedRoute = async () => {
-      const formatCoordinates = (coords) => {
-        return coords.map(coord => `${coord.longitude},${coord.latitude}`).join(';');
+      const formatCoordinates = (userCoords, coords) => {
+        const formattedUserCoord = `${userCoords.longitude},${userCoords.latitude}`;
+        // return coords.map(coord => `${coord.longitude},${coord.latitude}`).join(';');
+        const formattedCoords = coords.map(coord => `${coord.longitude},${coord.latitude}`).join(';');
+        return `${formattedUserCoord};${formattedCoords}`;
       };
-      const formattedCoordinates = formatCoordinates(coordinates);
+      const userCoords = {
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude,
+      };
+      // const formattedCoordinates = formatCoordinates(coordinates);
+      const formattedCoordinates = formatCoordinates(userCoords, coordinates);
       const url = `http://web1.go100.ca:5000/table/v1/driving/${formattedCoordinates}`;
       // const url = `http://web1.go100.ca:5000/route/v1/driving/${formattedCoordinates}`; // waypoints instead of destinations
       // console.log(formattedCoordinates)
@@ -269,15 +278,16 @@ const MapPage = ({ navigation }) => {
       }
     }
     fetchOptimizedRoute();
-  }, []);
+  }, [currentLocation]);
 
   useEffect(() => {
     // Check if rawRouteData is not null before calling greedyTSP
     if (rawRouteData && rawRouteData.durations && rawRouteData.destinations) {
       const startingLocationIndex = 0; // Index of the starting location in the destinations array
       const optimizedRoute = greedyTSP(rawRouteData.durations, rawRouteData.destinations, startingLocationIndex);
+      setDistanceMatrixOptimized(optimizedRoute)
       // console.log("Optimized route:", optimizedRoute);
-      console.log(optimizedRouteData)
+      // console.log(optimizedRouteData)
     }
   }, [rawRouteData]);
 
@@ -303,14 +313,16 @@ const MapPage = ({ navigation }) => {
           <MapView style={styles.map} initialRegion={initialRegion} showsUserLocation={true}>
             {currentLocation && (
               <View>
-                {optimizedRouteData.map((location, index) => (
+                {distanceMatrixOptimized.map((location, index) => (
+                  // 03-03
+                  index > 0 &&
                   <Marker
                     key={index}
                     coordinate={{
-                      latitude: location.latitude,
-                      longitude: location.longitude,
+                      latitude: location.coordinates[1],
+                      longitude: location.coordinates[0],
                     }}
-                    title={location.title}
+                    title={location.name}
                   >
                     <View style={{ borderRadius: 30, backgroundColor: 'black' }}>
                       <Text style={{ color: 'white', padding: 10 }}>{index}</Text>
